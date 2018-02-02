@@ -124,7 +124,7 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
   # TODO(pwnall): Insert correct flag when VS gets ARM CRC32C support.
   set(CMAKE_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS} /arch:NOTYET")
 else(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-  set(CMAKE_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS} -march=armv8-a+crc+crypto")
+  #set(CMAKE_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS} -march=armv8-a+crc+crypto")
 endif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 check_cxx_source_compiles("
 #include <arm_acle.h>
