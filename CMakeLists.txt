@@ -217,7 +217,7 @@ if(HAVE_ARM64_CRC32C)
     # TODO(pwnall): Insert correct flag when VS gets ARM64 CRC32C support.
     target_compile_options(crc32c_arm64 PRIVATE "/arch:NOTYET")
   else(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    target_compile_options(crc32c_arm64 PRIVATE "-march=armv8-a+crc+crypto")
+    #target_compile_options(crc32c_arm64 PRIVATE "-march=armv8-a+crc+crypto")
   endif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 endif(HAVE_ARM64_CRC32C)
 
