@@ -33,7 +33,16 @@ inline bool CanUseArm64Linux() {
   // From 'arch/arm64/include/uapi/asm/hwcap.h' in Linux kernel source code.
   constexpr unsigned long kHWCAP_PMULL = 1 << 4;
   constexpr unsigned long kHWCAP_CRC32 = 1 << 7;
-  unsigned long hwcap = (&getauxval != nullptr) ? getauxval(AT_HWCAP) : 0;
+  // unsigned long hwcap = (&getauxval != nullptr) ? getauxval(AT_HWCAP) : 0;
+  unsigned long hwcap =
+ 	#if !HAVE_STRONG_GETAUXVAL
+ 	    (&getauxval != nullptr) ?
+ 	#endif
+ 	    getauxval(AT_HWCAP)
+ 	#if !HAVE_STRONG_GETAUXVAL
+ 	    : 0
+ 	#endif
+ 	    ;
   return (hwcap & (kHWCAP_PMULL | kHWCAP_CRC32)) ==
          (kHWCAP_PMULL | kHWCAP_CRC32);
 #else
