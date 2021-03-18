@@ -3,7 +3,7 @@
 # found in the LICENSE file. See the AUTHORS file for names of contributors.
 
 cmake_minimum_required(VERSION 3.1)
-project(Crc32c VERSION 1.1.0 LANGUAGES C CXX)
+project(crc32c VERSION 1.1.0 LANGUAGES C CXX)
 
 # C standard can be overridden when this is used as a sub-project.
 if(NOT CMAKE_C_STANDARD)
@@ -394,7 +394,7 @@ endif(CRC32C_BUILD_BENCHMARKS)
 
 if(CRC32C_INSTALL)
   install(TARGETS crc32c
-    EXPORT Crc32cTargets
+    EXPORT crc32cTargets
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -416,8 +416,8 @@ if(CRC32C_INSTALL)
     COMPATIBILITY SameMajorVersion
   )
   install(
-    EXPORT Crc32cTargets
-    NAMESPACE Crc32c::
+    EXPORT crc32cTargets
+    NAMESPACE crc32c::
     DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}"
   )
   install(
