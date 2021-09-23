@@ -2,6 +2,7 @@
 *.sw*
 .DS_Store
 /.vscode
+/.vs
 
 # Build directory.
 build/
