@@ -226,6 +226,9 @@ target_sources(crc32c_arm64
     "src/crc32c_arm64.cc"
     "src/crc32c_arm64.h"
 )
+
+target_compile_definitions(crc32c_arm64 PRIVATE CRC32C_HAVE_CONFIG_H=1)
+
 if(HAVE_ARM64_CRC32C)
   if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     # TODO(pwnall): Insert correct flag when VS gets ARM64 CRC32C support.
@@ -249,6 +252,9 @@ target_sources(crc32c_sse42
     "src/crc32c_sse42.cc"
     "src/crc32c_sse42.h"
 )
+
+target_compile_definitions(crc32c_sse42 PRIVATE CRC32C_HAVE_CONFIG_H=1)
+
 if(HAVE_SSE42)
   if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     target_compile_options(crc32c_sse42 PRIVATE "/arch:AVX")
@@ -297,7 +303,7 @@ target_include_directories(crc32c
 )
 
 target_compile_definitions(crc32c
-PUBLIC
+PRIVATE
   CRC32C_HAVE_CONFIG_H=1
 )
 
@@ -347,6 +353,8 @@ if(CRC32C_BUILD_TESTS)
   )
   target_link_libraries(crc32c_tests crc32c gtest)
 
+  target_compile_definitions(crc32c_tests PRIVATE CRC32C_HAVE_CONFIG_H=1)
+
   # Warnings as errors in Visual Studio for this project's targets.
   if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     set_property(TARGET crc32c_tests APPEND PROPERTY COMPILE_OPTIONS "/WX")
@@ -387,6 +395,8 @@ if(CRC32C_BUILD_BENCHMARKS)
       "src/crc32c_benchmark.cc"
   )
   target_link_libraries(crc32c_bench crc32c)
+
+  target_compile_definitions(crc32c_bench PRIVATE CRC32C_HAVE_CONFIG_H=1)
 
   # This project uses Google benchmark for benchmarking.
   set(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "" FORCE)
