@@ -1,6 +1,6 @@
 # CRC32C
 
-[![Build Status](https://github.com/google/crc32c/actions/workflows/build.yml/badge.svg)](https://github.com/google/crc32c/actions/workflows/build.yml)
+[![Build Status](https://github.com/muecoin/crc32c-subtree/actions/workflows/build.yml/badge.svg)](https://github.com/muecoin/crc32c-subtree/actions/workflows/build.yml)
 
 New file format authors should consider
 [HighwayHash](https://github.com/google/highwayhash). The initial version of
