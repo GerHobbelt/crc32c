@@ -297,12 +297,13 @@ target_include_directories(crc32c
 )
 
 target_compile_definitions(crc32c
-PRIVATE
+PUBLIC
   CRC32C_HAVE_CONFIG_H=1
 )
 
 set_target_properties(crc32c
-  PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR})
+  PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR}
+)
 
 # Warnings as errors in Visual Studio for this project's targets.
 if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
