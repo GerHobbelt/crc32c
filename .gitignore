@@ -4,6 +4,7 @@
 /.cache
 /.vscode
 /.vs
+CMakeSettings.json
 
 # Build directory.
 build/
