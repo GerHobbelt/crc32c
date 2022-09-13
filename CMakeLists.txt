@@ -265,7 +265,7 @@ endif(BUILD_SHARED_LIBS)
 # Must be included before CMAKE_INSTALL_INCLUDEDIR is used.
 include(GNUInstallDirs)
 
-add_library(crc32c ""
+add_library(crc32c STATIC
   # TODO(pwnall): Move the TARGET_OBJECTS generator expressions to the PRIVATE
   # section of target_sources when cmake_minimum_required becomes 3.9 or above.
   $<TARGET_OBJECTS:crc32c_arm64>
