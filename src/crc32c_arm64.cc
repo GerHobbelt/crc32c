@@ -12,6 +12,7 @@
 
 #include <cstddef>
 #include <cstdint>
+#include <cstring>
 
 #include "./crc32c_internal.h"
 #ifdef CRC32C_HAVE_CONFIG_H
@@ -67,7 +68,7 @@ namespace crc32c {
 uint32_t ExtendArm64(uint32_t crc, const uint8_t *data, size_t size) {
   int64_t length = size;
   uint32_t crc0, crc1, crc2, crc3;
-  uint64_t t0, t1, t2;
+  uint64_t t0, t1, t2, t3;
 
   // k0=CRC(x^(3*SEGMENTBYTES*8)), k1=CRC(x^(2*SEGMENTBYTES*8)),
   // k2=CRC(x^(SEGMENTBYTES*8))
@@ -98,7 +99,8 @@ uint32_t ExtendArm64(uint32_t crc, const uint8_t *data, size_t size) {
   }
 
   while (length >= 8) {
-    crc = __crc32cd(crc, *(uint64_t *)data);
+    std::memcpy(&t3, data, sizeof t3);
+    crc = __crc32cd(crc, t3);
     data += 8;
     length -= 8;
   }
