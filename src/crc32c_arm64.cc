@@ -12,6 +12,7 @@
 
 #include <cstddef>
 #include <cstdint>
+#include <cstring>
 
 #include "./crc32c_internal.h"
 #ifdef CRC32C_HAVE_CONFIG_H
@@ -67,7 +68,7 @@ namespace crc32c {
 uint32_t ExtendArm64(uint32_t crc, const uint8_t *data, size_t size) {
   int64_t length = size;
   uint32_t crc0, crc1, crc2, crc3;
-  uint64_t t0, t1, t2;
+  uint64_t t0, t1, t2, t3;
 
   // k0=CRC(x^(3*SEGMENTBYTES*8)), k1=CRC(x^(2*SEGMENTBYTES*8)),
   // k2=CRC(x^(SEGMENTBYTES*8))
@@ -88,7 +89,11 @@ uint32_t ExtendArm64(uint32_t crc, const uint8_t *data, size_t size) {
     t2 = (uint64_t)vmull_p64(crc2, k2);
     t1 = (uint64_t)vmull_p64(crc1, k1);
     t0 = (uint64_t)vmull_p64(crc0, k0);
-    crc = __crc32cd(crc3, *(uint64_t *)data);
+    // We use std::memcpy instead of direct access through
+    // the `(uint64_t *)data` pointer to avoid potential
+    // misalignment issues.
+    std::memcpy(&t3, data, sizeof t3);
+    crc = __crc32cd(crc3, t3);
     data += sizeof(uint64_t);
     crc ^= __crc32cd(0, t2);
     crc ^= __crc32cd(0, t1);
@@ -98,7 +103,11 @@ uint32_t ExtendArm64(uint32_t crc, const uint8_t *data, size_t size) {
   }
 
   while (length >= 8) {
-    crc = __crc32cd(crc, *(uint64_t *)data);
+    // We use std::memcpy instead of direct access through
+    // the `(uint64_t *)data` pointer to avoid potential
+    // misalignment issues.
+    std::memcpy(&t3, data, sizeof t3);
+    crc = __crc32cd(crc, t3);
     data += 8;
     length -= 8;
   }
