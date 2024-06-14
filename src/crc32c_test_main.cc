@@ -2,7 +2,9 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+#ifdef CRC32C_HAVE_CONFIG_H
 #include "crc32c/crc32c_config.h"
+#endif
 
 #include "gtest/gtest.h"
 

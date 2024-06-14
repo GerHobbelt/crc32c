@@ -8,7 +8,9 @@
 #include <cstdint>
 #include <cstring>
 
+#ifdef CRC32C_HAVE_CONFIG_H
 #include "crc32c/crc32c_config.h"
+#endif
 
 namespace crc32c {
 

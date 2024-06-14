@@ -17,7 +17,9 @@
 #include "./crc32c_prefetch.h"
 #include "./crc32c_read_le.h"
 #include "./crc32c_round_up.h"
+#ifdef CRC32C_HAVE_CONFIG_H
 #include "crc32c/crc32c_config.h"
+#endif
 
 #if HAVE_SSE42 && (defined(_M_X64) || defined(__x86_64__))
 
