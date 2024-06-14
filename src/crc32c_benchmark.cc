@@ -92,7 +92,7 @@ BENCHMARK_REGISTER_F(CRC32CBenchmark, Sse42)
 
 #endif  // HAVE_SSE42 && (defined(_M_X64) || defined(__x86_64__))
 
-int main(int argc, char** argv) {
+int main(int argc, const char** argv) {
 #if CRC32C_TESTS_BUILT_WITH_GLOG
   google::InitGoogleLogging(argv[0]);
   google::InstallFailureSignalHandler();
