@@ -12,6 +12,7 @@ namespace crc32c {
 
 // Reads a little-endian 32-bit integer from a 32-bit-aligned buffer.
 inline uint32_t ReadUint32LE(const uint8_t* buffer) {
+  // This should be optimized to a single instruction. (Modern CLANG et al do this: https://github.com/google/leveldb/commit/201f52201f5dd9701e7a8ceaa0ec4d344e69e022)
   return ((static_cast<uint32_t>(static_cast<uint8_t>(buffer[0]))) |
           (static_cast<uint32_t>(static_cast<uint8_t>(buffer[1])) << 8) |
           (static_cast<uint32_t>(static_cast<uint8_t>(buffer[2])) << 16) |
@@ -20,6 +21,7 @@ inline uint32_t ReadUint32LE(const uint8_t* buffer) {
 
 // Reads a little-endian 64-bit integer from a 64-bit-aligned buffer.
 inline uint64_t ReadUint64LE(const uint8_t* buffer) {
+  // This should be optimized to a single instruction. (Modern CLANG et al do this: https://github.com/google/leveldb/commit/201f52201f5dd9701e7a8ceaa0ec4d344e69e022)
   return ((static_cast<uint64_t>(static_cast<uint8_t>(buffer[0]))) |
           (static_cast<uint64_t>(static_cast<uint8_t>(buffer[1])) << 8) |
           (static_cast<uint64_t>(static_cast<uint8_t>(buffer[2])) << 16) |
