@@ -10,7 +10,9 @@
 #include <cstddef>
 #include <cstdint>
 
+#ifdef CRC32C_HAVE_CONFIG_H
 #include "crc32c/crc32c_config.h"
+#endif
 
 #if HAVE_LOONGARCH_CRC32C
 
