@@ -12,6 +12,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <string>
+#include <cstring>
 
 #else  /* !defined(__cplusplus) */
 
@@ -70,6 +71,11 @@ inline uint32_t Crc32c(const std::byte* data, size_t count) {
 inline uint32_t Crc32c(const std::string& string) {
   return Crc32c(reinterpret_cast<const uint8_t*>(string.data()),
                 string.size());
+}
+
+// Computes the CRC32C of the string's content.
+inline uint32_t Crc32c(const char *string) {
+  return Crc32c(reinterpret_cast<const uint8_t*>(string), strlen(string));
 }
 
 }  // namespace crc32c
